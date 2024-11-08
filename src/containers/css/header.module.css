@@ -1,0 +1,85 @@
+/* header.module.css */
+
+/* Định dạng container cho header */
+.headerContainer {
+  display: flex;
+  justify-content: flex-start; /* Căn trái tất cả các phần tử */
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+/* Định dạng logo */
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+  margin-right: 20px; /* Khoảng cách giữa logo và menu */
+}
+
+/* Định dạng menu chính */
+.menu {
+  display: flex;
+  gap: 20px; /* Khoảng cách giữa các mục menu chính */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Định dạng cho mỗi mục menu chính */
+.menuItem {
+  position: relative;
+  padding: 10px 15px;
+}
+
+/* Định dạng cho liên kết trong menu chính */
+.menuItem a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.menuItem a:hover {
+  color: #007bff;
+}
+
+/* Định dạng cho dropdown (menu con) */
+.categoryDropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #f5f5f5;
+  display: none; /* Ẩn menu con khi không hover */
+  padding: 10px;
+  border-radius: 8px;
+  width: 200px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  flex-direction: column; /* Hiển thị theo chiều dọc */
+}
+
+/* Hiển thị menu con khi hover vào menu item */
+.menuItem:hover .categoryDropdown {
+  display: block;
+}
+
+/* Định dạng cho các mục trong menu con */
+.categoryListItem {
+  padding: 10px;
+  font-size: 16px;
+  color: #333 !important;
+  text-decoration: none;
+}
+
+.categoryListItem:hover {
+  background-color: #e0e0e0;
+  color: #007bff !important;
+}
+
+/* Định dạng cho menu chính khi hover */
+.menuItem:hover > a {
+  color: #007bff;
+}

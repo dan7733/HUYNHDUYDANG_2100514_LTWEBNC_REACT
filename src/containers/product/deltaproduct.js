@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import styles from '../css/deltaproduct.module.css'; // Import CSS module
 
 const ProductDetail = () => {
   const { id } = useParams(); // Lấy id từ URL
-  const [product, setProduct] = useState(null);
+  const [deltaProduct, setDeltaProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Gọi API để lấy thông tin sản phẩm theo id
+    // Gọi API để lấy thông tin chi tiết sản phẩm theo id
     axios.get(`http://localhost:3000/api/v1/deltaproduct/${id}`)
       .then(response => {
         if (response.data.errCode === 1) {
-          setProduct(response.data.product);
+          setDeltaProduct(response.data.deltaProduct); // Lấy thông tin chi tiết sản phẩm
         } else {
-          setError(response.data.message);
+          setError(response.data.message); // Nếu có lỗi từ API
         }
       })
-      .catch(err => {
-        setError("Có lỗi xảy ra khi tải sản phẩm");
+      .catch(() => {
+        setError("Có lỗi xảy ra khi tải sản phẩm"); // Lỗi kết nối hoặc phản hồi từ API
       })
       .finally(() => {
         setLoading(false);
@@ -35,16 +36,21 @@ const ProductDetail = () => {
   }
 
   return (
-    <div>
-      {product ? (
+    <div className={styles.deltaproductContainer}>
+      {deltaProduct ? (
         <>
-          <h2>{product.ten}</h2>
-          <img src={`http://localhost:3000/images/product/${product.hinhanh}`} alt={product.ten} width="200" />
-          <p>{product.mota}</p>
-          <p>Giá: {product.gia} VND</p>
+          <h2 className={styles.deltaproductTitle}>{deltaProduct.ten}</h2>
+          <img
+            className={styles.deltaproductImage}
+            src={`http://localhost:3000/images/product/${deltaProduct.hinhanh}`}
+            alt={deltaProduct.ten}
+            width="200"
+          />
+          <p className={styles.deltaproductDescription}>{deltaProduct.mota}</p>
+          <p className={styles.deltaproductPrice}>Giá: {deltaProduct.gia} VND</p>
         </>
       ) : (
-        <p>Không tìm thấy sản phẩm</p>
+        <p className={styles.deltaproductNotFound}>Không tìm thấy sản phẩm</p>
       )}
     </div>
   );

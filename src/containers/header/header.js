@@ -1,51 +1,38 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import CategoryDropdown from './CategoryDropdown'; // Import component mới
+import styles from '../css/header.module.css';
 
-const CategoryList = () => {
-  const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(true); // Trạng thái loading
-  const [error, setError] = useState(null); // Trạng thái lỗi
-
-  useEffect(() => {
-    // Gọi API bằng axios
-    axios.get('http://localhost:3000/api/v1/category')
-      .then(response => {
-        console.log(response.data); // Debug: kiểm tra dữ liệu trả về
-        if (response.data.errCode === 1) {
-          setCategories(response.data.categorys); // Cập nhật dữ liệu vào state
-        } else {
-          setError('Có lỗi xảy ra khi lấy dữ liệu');
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching categories:', error);
-        setError('Không thể kết nối với API');
-      })
-      .finally(() => {
-        setLoading(false); // Kết thúc trạng thái loading
-      });
-  }, []);
-
-  // Nếu đang tải, hiển thị thông báo loading
-  if (loading) {
-    return <div>Đang tải dữ liệu...</div>;
-  }
-
-  // Nếu có lỗi, hiển thị thông báo lỗi
-  if (error) {
-    return <div style={{ color: 'red' }}>{error}</div>;
-  }
-
+const Header = () => {
   return (
-    <div>
-      <h2>Danh sách loại sản phẩm</h2>
-      <ul>
-        {categories.map((category, index) => (
-          <li key={index}>{category.ten}</li> // Hiển thị tên loại sản phẩm
-        ))}
-      </ul>
-    </div>
+    <header className={styles.headerContainer}>
+      {/* Logo */}
+      <Link to="/" className={styles.logo}>
+        MyShop
+      </Link>
+
+      {/* Menu chính */}
+      <nav>
+        <ul className={styles.menu}>
+          <li className={styles.menuItem}>
+            <Link to="/">Trang chủ</Link>
+          </li>
+          <li className={styles.menuItem}>
+            <Link to="/about">Giới thiệu</Link>
+          </li>
+          <li className={styles.menuItem}>
+            <Link to="/contact">Liên hệ</Link>
+          </li>
+
+          {/* Category dropdown */}
+          <li className={styles.menuItem}>
+            <span>Danh mục</span>
+            <CategoryDropdown /> {/* Sử dụng CategoryDropdown ở đây */}
+          </li>
+        </ul>
+      </nav>
+    </header>
   );
 };
 
-export default CategoryList;
+export default Header;

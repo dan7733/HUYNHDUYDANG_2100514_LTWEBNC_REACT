@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import styles from '../css/product.module.css'; 
 
 const ProductList = () => {
   const [products, setProducts] = useState([]); // Đổi tên state thành "products"
@@ -38,14 +39,16 @@ const ProductList = () => {
   }
 
   return (
-    <div>
-      <h2>Danh sách sản phẩm</h2>
-      <ul>
+    <div className={styles.productListContainer}>
+      <h2 className={styles.productTitle}>Danh sách sản phẩm</h2>
+      <ul className={styles.productList}>
         {products.map((product, index) => (
-          <li key={index}>
+          <li key={index} className={styles.productItem}>
             <h3>{product.ten}</h3> {/* Hiển thị tên sản phẩm */}
             <p>Giá: {product.gia} VND</p>
-            <Link to={`/product/${product.id}`}>Chi tiết sản phẩm</Link>
+            <Link to={`/deltaproduct/${product.masp}`} className={styles.productLink}>
+              Chi tiết sản phẩm
+            </Link>
           </li>
         ))}
       </ul>
