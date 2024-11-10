@@ -1,14 +1,13 @@
-/* header.module.css */
-
 /* Định dạng container cho header */
 .headerContainer {
   display: flex;
-  justify-content: flex-start; /* Căn trái tất cả các phần tử */
+  justify-content: flex-start; /* Căn bên trái */
   align-items: center;
   padding: 10px 20px;
   background-color: #333;
   color: white;
   font-family: Arial, sans-serif;
+  width: 100%;
 }
 
 /* Định dạng logo */
@@ -17,13 +16,17 @@
   font-weight: bold;
   color: #fff;
   text-decoration: none;
-  margin-right: 20px; /* Khoảng cách giữa logo và menu */
+  transition: color 0.3s ease; /* Thêm hiệu ứng chuyển màu */
+}
+
+.logo:hover {
+  color: #007bff; /* Thay đổi màu khi hover */
 }
 
 /* Định dạng menu chính */
 .menu {
   display: flex;
-  gap: 20px; /* Khoảng cách giữa các mục menu chính */
+  gap: 20px; /* Khoảng cách giữa các mục menu */
   list-style: none;
   padding: 0;
   margin: 0;
@@ -41,13 +44,58 @@
   text-decoration: none;
   font-size: 18px;
   font-weight: bold;
+  transition: color 0.3s ease; /* Thêm hiệu ứng chuyển màu */
 }
 
 .menuItem a:hover {
   color: #007bff;
 }
 
-/* Định dạng cho dropdown (menu con) */
+/* Định dạng cho phần đăng nhập/đăng xuất */
+.userMenu {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Thêm khoảng cách giữa tên người dùng và nút đăng xuất */
+  font-weight: bold;
+}
+
+.greeting {
+  font-size: 18px;
+  color: #fff;
+}
+
+.logoutButton {
+  color: red; /* Màu đỏ cho nút đăng xuất */
+  cursor: pointer;
+  font-weight: normal;
+  transition: color 0.3s ease;
+}
+
+.logoutButton:hover {
+  color: #ff4d4d; /* Màu đỏ nhạt khi hover */
+}
+
+/* Định dạng khi không đăng nhập */
+.loginLink {
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+  border: 2px solid #007bff; /* Viền cho nút đăng nhập */
+  border-radius: 8px; /* Bo tròn các góc */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.loginLink:hover {
+  background-color: #007bff; /* Màu nền khi hover */
+  color: #fff; /* Màu chữ khi hover */
+}
+
+.loginLink:active {
+  background-color: #0056b3; /* Màu nền khi click */
+}
+
+/* Định dạng cho menu dropdown */
 .categoryDropdown {
   position: absolute;
   top: 100%;
@@ -72,14 +120,10 @@
   font-size: 16px;
   color: #333 !important;
   text-decoration: none;
+  transition: background-color 0.3s ease; /* Thêm hiệu ứng chuyển màu nền */
 }
 
 .categoryListItem:hover {
   background-color: #e0e0e0;
   color: #007bff !important;
-}
-
-/* Định dạng cho menu chính khi hover */
-.menuItem:hover > a {
-  color: #007bff;
 }

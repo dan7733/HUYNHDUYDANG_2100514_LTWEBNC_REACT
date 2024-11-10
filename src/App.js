@@ -1,9 +1,11 @@
 import { Outlet } from 'react-router-dom';
 import Header from './containers/header/header';
 import { Footer } from './containers/foot/footer';
-import { Product } from './containers/product/product';
+import { ContextProvider } from './containers/header/Context'; 
+
 function App() {
   return (
+    <ContextProvider>
     <div>
       <div className='header'>
         <Header />
@@ -15,6 +17,7 @@ function App() {
         <Footer />
       </div>
     </div>
+  </ContextProvider>
   );
 }
 
