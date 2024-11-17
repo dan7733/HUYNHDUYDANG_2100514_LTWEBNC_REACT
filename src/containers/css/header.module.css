@@ -107,6 +107,7 @@
   width: 200px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   flex-direction: column; /* Hiển thị theo chiều dọc */
+  z-index: 999; /* Đảm bảo dropdown sẽ nằm trên các phần tử khác */
 }
 
 /* Hiển thị menu con khi hover vào menu item */
@@ -121,6 +122,7 @@
   color: #333 !important;
   text-decoration: none;
   transition: background-color 0.3s ease; /* Thêm hiệu ứng chuyển màu nền */
+  display: block; /* Đảm bảo các mục trong dropdown hiển thị theo dạng block */
 }
 
 .categoryListItem:hover {

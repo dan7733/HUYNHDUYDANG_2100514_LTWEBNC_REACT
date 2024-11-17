@@ -1,39 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts } from '../../redux/actions/productActions'; // Import action của bạn
 import { Link } from 'react-router-dom';
-import styles from '../css/product.module.css'; 
+import styles from '../css/product.module.css';
 
 const ProductList = () => {
-  const [products, setProducts] = useState([]); // Đổi tên state thành "products"
-  const [loading, setLoading] = useState(true); // Trạng thái loading
-  const [error, setError] = useState(null); // Trạng thái lỗi
+  const dispatch = useDispatch();
+  const { products, loading, error } = useSelector(state => state.products);
 
   useEffect(() => {
-    // Gọi API bằng axios để lấy danh sách sản phẩm
-    axios.get('http://localhost:3000/api/v1/product')
-      .then(response => {
-        console.log(response.data); // Debug: kiểm tra dữ liệu trả về
-        if (response.data.errCode === 1) {
-          setProducts(response.data.products); // Cập nhật dữ liệu sản phẩm vào state
-        } else {
-          setError('Có lỗi xảy ra khi lấy dữ liệu sản phẩm');
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching products:', error);
-        setError('Không thể kết nối với API');
-      })
-      .finally(() => {
-        setLoading(false); // Kết thúc trạng thái loading
-      });
-  }, []);
+    dispatch(fetchProducts()); // Dispatch action fetchProducts
+  }, [dispatch]);
 
-  // Nếu đang tải, hiển thị thông báo loading
   if (loading) {
     return <div>Đang tải dữ liệu...</div>;
   }
 
-  // Nếu có lỗi, hiển thị thông báo lỗi
   if (error) {
     return <div style={{ color: 'red' }}>{error}</div>;
   }
@@ -44,7 +26,7 @@ const ProductList = () => {
       <ul className={styles.productList}>
         {products.map((product, index) => (
           <li key={index} className={styles.productItem}>
-            <h3>{product.ten}</h3> {/* Hiển thị tên sản phẩm */}
+            <h3>{product.ten}</h3>
             <p>Giá: {product.gia} VND</p>
             <Link to={`/deltaproduct/${product.masp}`} className={styles.productLink}>
               Chi tiết sản phẩm
@@ -55,4 +37,5 @@ const ProductList = () => {
     </div>
   );
 };
+
 export default ProductList;
